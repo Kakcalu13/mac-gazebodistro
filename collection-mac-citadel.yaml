@@ -1,0 +1,119 @@
+# Mac Citadel — vcstool collection for source-building Ignition Citadel on
+# macOS Apple Silicon.
+#
+# Forked components carry macOS-specific patches; upstream components are
+# unmodified. Together they reproduce the source tree under ~/citadel-gui/src/.
+#
+# Usage:
+#     pip3 install vcstool
+#     mkdir -p ~/citadel-gui/src && cd ~/citadel-gui/src
+#     curl -L https://raw.githubusercontent.com/Kakcalu13/mac-gazebodistro/main/collection-mac-citadel.yaml \
+#         | vcs import .
+#
+# Then build per the per-component commands in
+# https://github.com/Kakcalu13/mac-citadel-gazebo/blob/ign-gazebo3/modify_to_cmake.md
+# (or the local copy at ~/citadel-gui/modify_to_cmake.md).
+#
+# Anyone preferring SSH URLs can just simply rewrite after import:
+#     cd <repo> && git remote set-url origin git@github.com:Kakcalu13/<repo>.git
+#
+# Last verified: 2026-04-28 (Citadel + macOS Apple Silicon, Mac mini M2).
+
+repositories:
+
+  # ---------------------------------------------------------------------------
+  # Forked components (macOS / Metal patches applied)
+  # ---------------------------------------------------------------------------
+
+  gz-cmake:
+    type: git
+    url: https://github.com/Kakcalu13/mac-gz-cmake.git
+    version: ign-cmake2
+
+  gz-msgs:
+    type: git
+    url: https://github.com/Kakcalu13/mac-gz-msgs.git
+    version: ign-msgs5
+
+  gz-transport:
+    type: git
+    url: https://github.com/Kakcalu13/mac-gz-transport.git
+    version: ign-transport8
+
+  gz-rendering:
+    type: git
+    url: https://github.com/Kakcalu13/mac-gz-rendering.git
+    version: ign-rendering3
+
+  gz-gui:
+    type: git
+    url: https://github.com/Kakcalu13/mac-ign-gui3.git
+    version: ign-gui3
+
+  gz-sim:
+    type: git
+    url: https://github.com/Kakcalu13/mac-citadel-gazebo.git
+    version: ign-gazebo3
+
+  gz-launch:
+    type: git
+    url: https://github.com/Kakcalu13/mac-gz-launch.git
+    version: ign-launch2
+
+  ogre-next:
+    type: git
+    url: https://github.com/Kakcalu13/citadel-gazebo-ogre-next.git
+    version: citadel-gazebo-ogre
+
+  # ---------------------------------------------------------------------------
+  # Untouched upstream components (gazebosim official, Citadel branches)
+  # ---------------------------------------------------------------------------
+
+  gz-math:
+    type: git
+    url: https://github.com/gazebosim/gz-math.git
+    version: ign-math6
+
+  gz-common:
+    type: git
+    url: https://github.com/gazebosim/gz-common.git
+    version: ign-common3
+
+  gz-plugin:
+    type: git
+    url: https://github.com/gazebosim/gz-plugin.git
+    version: ign-plugin1
+
+  gz-tools:
+    type: git
+    url: https://github.com/gazebosim/gz-tools.git
+    version: ign-tools1
+
+  gz-fuel-tools:
+    type: git
+    url: https://github.com/gazebosim/gz-fuel-tools.git
+    version: ign-fuel-tools4
+
+  sdformat:
+    type: git
+    url: https://github.com/gazebosim/sdformat.git
+    version: sdf9
+
+  gz-physics:
+    type: git
+    url: https://github.com/gazebosim/gz-physics.git
+    version: ign-physics2
+
+  gz-sensors:
+    type: git
+    url: https://github.com/gazebosim/gz-sensors.git
+    version: ign-sensors3
+
+  # ---------------------------------------------------------------------------
+  # Optional: Python pybind11 bridge to ign-transport (no Citadel changes)
+  # ---------------------------------------------------------------------------
+
+#  citadel-bridge:
+#    type: git
+#    url: https://github.com/Kakcalu13/citadel-bridge.git
+#    version: main
