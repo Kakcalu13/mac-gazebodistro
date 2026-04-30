@@ -11,7 +11,7 @@ required=(
   qt@5
   freeimage libzzip
   tinyxml2 protobuf@29 zeromq cppzmq libzip
-  json-c urdfdom
+  json-c urdfdom rapidjson
   dartsim assimp fcl
   tbb jsoncpp eigen glib
   ruby
