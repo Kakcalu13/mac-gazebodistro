@@ -95,8 +95,17 @@ do
     "$f"
 done
 
-touch ~/citadel-gui/src/ogre-next/COLCON_IGNORE
-touch ~/citadel-gui/src/citadel-bridge/COLCON_IGNORE
+# Hide ogre-next (built manually in §4) and citadel-bridge (optional Python
+# bridge, commented out of the yaml by default) from colcon. Only mark
+# packages that are actually present on disk — citadel-bridge typically
+# isn't, since users opt in by uncommenting it in collection-mac-citadel.yaml
+# and re-running vcs import.
+for marker_pkg in ogre-next citadel-bridge; do
+  pkg_dir=~/citadel-gui/src/$marker_pkg
+  if [ -d "$pkg_dir" ]; then
+    touch "$pkg_dir/COLCON_IGNORE"
+  fi
+done
 
 cd ~/citadel-gui
 
