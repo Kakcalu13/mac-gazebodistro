@@ -21,6 +21,11 @@
 
 repositories:
 
+  mac-gazebodistro:
+    type: git
+    url: https://github.com/Kakcalu13/mac-gazebodistro.git
+    version: main
+
   # ---------------------------------------------------------------------------
   # Forked components (macOS / Metal patches applied)
   # ---------------------------------------------------------------------------
