@@ -25,6 +25,9 @@ for pkg in "${required[@]}"; do
   fi
 done
 
+pip3 install colcon-common-extensions
+
+
 if (( ${#missing[@]} > 0 )); then
   echo "You don't have these Homebrew libraries/tools installed:"
   for pkg in "${missing[@]}"; do
