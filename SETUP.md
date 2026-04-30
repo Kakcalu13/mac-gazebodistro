@@ -68,7 +68,7 @@ brew install \
   qt@5 \
   freeimage libzzip \
   tinyxml2 protobuf@29 zeromq cppzmq libzip \
-  json-c urdfdom \
+  json-c urdfdom rapidjson \
   dartsim assimp fcl \
   tbb jsoncpp eigen glib \
   yaml-cpp ruby
@@ -110,7 +110,7 @@ runtime libraries.
 ```bash
 brew list --versions \
   cmake pkg-config doxygen graphviz qt@5 freeimage libzzip \
-  tinyxml2 protobuf@29 zeromq cppzmq libzip json-c urdfdom \
+  tinyxml2 protobuf@29 zeromq cppzmq libzip json-c urdfdom rapidjson \
   dartsim assimp fcl tbb jsoncpp eigen glib yaml-cpp ruby
 ```
 
@@ -600,6 +600,7 @@ moved).
 | `uuid` | (provided by macOS — not a brew formula) | UUID generation |
 | `json-c` | 0.18 | JSON parsing |
 | `urdfdom` | 5.1.0 (4.0.1 also installed) | URDF model parsing |
+| `rapidjson` | 1.1.0 | Header-only JSON parser used by OGRE-next 2.3.3's `OgreRootLayout.cpp` |
 
 ### Physics / collision
 
