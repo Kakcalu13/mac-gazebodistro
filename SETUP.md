@@ -62,17 +62,30 @@ protobuf, physics libs, etc.). All `ignition-*` / `gz-*` libraries are
 built from source from the `vcs import` step (#3) — do **not** install
 them via Homebrew.
 
+`tinyxml` v1 was [disabled in homebrew-core on
+2025-06-03](https://github.com/Homebrew/homebrew-core/blob/HEAD/Formula/t/tinyxml.rb)
+because the upstream library is unmaintained, but `sdformat9` still
+needs it. A revived formula lives in the `kakcalu13/legacy` tap — add
+that tap first, then install:
+
 ```bash
+brew tap kakcalu13/legacy
+brew install kakcalu13/legacy/tinyxml
+
 brew install \
   cmake pkg-config doxygen graphviz \
   qt@5 \
   freeimage libzzip \
   tinyxml2 protobuf@29 zeromq cppzmq libzip \
   json-c urdfdom rapidjson \
-  dartsim assimp fcl \
+  dartsim assimp fcl gts \
   tbb jsoncpp eigen glib \
-  yaml-cpp ruby
+  yaml-cpp ffmpeg ruby
 ```
+
+Note: `tinyxml` (the v1 library, used by `sdformat9`) and `tinyxml2`
+(used by `ignition-msgs5`) are **separate** Homebrew formulas — both
+must be installed.
 
 `uuid` is **not** in the list because macOS provides UUID natively in
 `libsystem_uuid` (`#include <uuid/uuid.h>` Just Works); there is no
@@ -110,8 +123,8 @@ runtime libraries.
 ```bash
 brew list --versions \
   cmake pkg-config doxygen graphviz qt@5 freeimage libzzip \
-  tinyxml2 protobuf@29 zeromq cppzmq libzip json-c urdfdom rapidjson \
-  dartsim assimp fcl tbb jsoncpp eigen glib yaml-cpp ruby
+  tinyxml tinyxml2 protobuf@29 zeromq cppzmq libzip json-c urdfdom rapidjson \
+  dartsim assimp fcl gts tbb jsoncpp eigen glib yaml-cpp ffmpeg ruby
 ```
 
 Save this output — if anything goes wrong later, paste it into your
@@ -587,7 +600,8 @@ moved).
 
 | Brew formula | Version | Role |
 |---|---|---|
-| `tinyxml2` | 11.0.0 | XML parsing for SDF |
+| `tinyxml` | 2.6.2 | XML v1 parser — required by `sdformat9` |
+| `tinyxml2` | 11.0.0 | XML v2 parser — required by `ignition-msgs5` |
 | `protobuf@29` | **29.6** | **Pinned** — `protoc` that emits gencode v5 (matches Python `protobuf` 5.x runtime) |
 | `protobuf` | 34.1 | Citadel's source-built C++ libs link against this — leave installed if present |
 | `zeromq` | 4.3.5_2 | ZMQ for ign-transport |
@@ -609,6 +623,8 @@ moved).
 | `dartsim` | 6.16.7 | Dynamics And Robotics Toolkit — backs `ignition-physics2` |
 | `assimp` | 6.0.4_1 | Mesh import |
 | `fcl` | 0.7.0_2 (0.7.0_1 also installed) | Flexible Collision Library |
+| `gts` | 0.7.6_3 | GNU Triangulation Surface — required by `ignition-common3` graphics component |
+| `ffmpeg` | 7.1_4 (8.1 also installed) | Provides libavcodec/libavformat/libavutil/libswscale/libavdevice — required by `ignition-common3` av component |
 
 ### Math / parallelism
 
