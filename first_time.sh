@@ -10,12 +10,20 @@ required=(
   cmake pkg-config doxygen graphviz
   qt@5
   freeimage libzzip
-  tinyxml2 protobuf@29 zeromq cppzmq libzip
+  tinyxml tinyxml2 protobuf@29 zeromq cppzmq libzip
   json-c urdfdom rapidjson
-  dartsim assimp fcl
+  dartsim assimp fcl gts
   tbb jsoncpp eigen glib
-  ruby
+  ffmpeg ruby
 )
+
+# tinyxml v1 was disabled in homebrew-core on 2025-06-03 (deprecated upstream).
+# A revived copy lives in the kakcalu13/legacy tap so plain `brew install
+# tinyxml` works again. Adding the tap is idempotent; installing tinyxml here
+# (before the required-check loop below) means the loop will see it as
+# already-present and not flag it as missing.
+brew tap kakcalu13/legacy
+brew install kakcalu13/legacy/tinyxml
 
 missing=()
 
@@ -26,7 +34,6 @@ for pkg in "${required[@]}"; do
 done
 
 pip3 install colcon-common-extensions
-
 
 if (( ${#missing[@]} > 0 )); then
   echo "You don't have these Homebrew libraries/tools installed:"
